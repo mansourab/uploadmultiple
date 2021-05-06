@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post{% endblock %}
+
+{% block body %}
+	<div class="container">
+	    <header class="text-center">
+	        <h1>Image gallery</h1>
+	    </header>
+			<div class="row">
+			{% for key, image in post.images %}
+			  	<div class="col-md-8 col-sm-12 co-xs-12 gal-item">
+				   <div class="row h-50">
+					   	<div class="col-md-12 col-sm-12 co-xs-12 gal-item">
+							{% if key == 0 %}
+								<div class="box">
+								 	<img src=" {{ asset('uploads/' ~ image.name) }} " class="img-ht img-fluid rounded" width="758" height="370">
+								</div>
+							{% endif %}
+						</div>
+					</div>
+			  		
+				    <div class="row h-50">
+					 	<div class="col-md-6 col-sm-6 co-xs-12 gal-item">
+		  					{% if key == 1 %}
+							  	<div class="box">
+									<img src="{{ asset('uploads/' ~ image.name) }}" class="img-ht img-fluid rounded" width="748" height="177">
+								</div>
+							{% endif %}
+						</div>
+
+						<div class="col-md-6 col-sm-6 co-xs-12 gal-item">
+							{% if key == 2 %}
+							 	<div class="box">
+									<img src="{{ asset('uploads/' ~ image.name) }}" class="img-ht img-fluid rounded" width="371" height="370">
+								</div>
+							{% endif %}
+						</div>
+		            </div>
+		      	</div>
+	        	
+	           <div class="col-md-4 col-sm-6 co-xs-12 gal-item">
+				   	<div class="col-md-12 col-sm-6 co-xs-12 gal-item h-25">
+	       				{% if key == 3 %}
+							<div class="box">
+								<img src="{{ asset('uploads/' ~ image.name) }}" class="img-ht img-fluid rounded" width="748" height="177">
+							</div>
+						{% endif %}
+					</div>
+
+				  	<div class="col-md-12 col-sm-6 co-xs-12 gal-item h-75">
+						{% if key == 4 %}
+						   	<div class="box">
+								<img src="{{ asset('uploads/' ~ image.name) }}" class="img-ht img-fluid rounded" width="748" height="177">
+							</div>
+						{% endif %}
+					</div>
+	            </div>
+			{% endfor %}
+		</div>
+		<br/>
+	</div>
+
+    <a href="{{ path('post_index') }}">back to list</a>
+
+    <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a>
+
+    {{ include('post/_delete_form.html.twig') }}
+{% endblock %}

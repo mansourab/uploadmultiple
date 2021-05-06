@@ -1,0 +1,19 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {# Verifier que la route est "post_edit" on affiche les images #}
+    {% if app.request.attributes.get('_route') == 'post_edit' %}
+        <h2>Images</h2>
+        {% for image in post.images %}
+        	<div>
+        		<img src=" {{ asset('/uploads/' ~ image.name) }} " alt="Image" width="150" height="150">
+
+        		<a href=" {{ path('post_delete_image', {'id': image.id}) }} " data-delete data-token=" {{ csrf_token('delete' ~ image.id)}} ">Supprimer</a>
+
+
+        	</div>
+        {% endfor %}
+    {% endif %}
+    
+{{ form_end(form) }}
